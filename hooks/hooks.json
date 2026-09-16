@@ -1,0 +1,17 @@
+{
+  "description": "Offer Sky Pie pairing on the first Remote Control session, until a device is paired.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT:-.}/hooks/offer-skypie-pairing.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

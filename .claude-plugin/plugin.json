@@ -1,0 +1,29 @@
+{
+  "name": "skypie",
+  "version": "0.1.1",
+  "description": "Send local files straight to your paired Sky Pie devices over a direct, end-to-end encrypted peer-to-peer link, and offer device pairing the moment a Remote Control session starts.",
+  "author": {
+    "name": "Alvaro Lillo",
+    "email": "alilloig@gmail.com"
+  },
+  "homepage": "https://github.com/alilloig/skypie-plugin",
+  "repository": "https://github.com/alilloig/skypie-plugin",
+  "license": "MIT",
+  "keywords": [
+    "skypie",
+    "skypie",
+    "file-transfer",
+    "peer-to-peer",
+    "remote-control",
+    "pairing"
+  ],
+  "mcpServers": {
+    "skypie": {
+      "type": "stdio",
+      "command": "bash",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/bin/skypie-mcp-launch.sh"
+      ]
+    }
+  }
+}

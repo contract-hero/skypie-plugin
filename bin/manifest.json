@@ -1,0 +1,6 @@
+{
+  "_comment": "Pins the skypie-mcp release the launcher downloads. scripts/publish-release.sh rewrites version and assets. An empty assets object means nothing is published yet.",
+  "version": "0.1.0",
+  "repo": "alilloig/skypie-plugin",
+  "assets": {}
+}
