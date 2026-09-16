@@ -6,9 +6,9 @@
     "name": "Alvaro Lillo",
     "email": "alilloig@gmail.com"
   },
-  "homepage": "https://github.com/alilloig/skypie-plugin",
-  "repository": "https://github.com/alilloig/skypie-plugin",
-  "license": "MIT",
+  "homepage": "https://github.com/contract-hero/skypie-plugin",
+  "repository": "https://github.com/contract-hero/skypie-plugin",
+  "license": "Apache-2.0",
   "keywords": [
     "skypie",
     "skypie",

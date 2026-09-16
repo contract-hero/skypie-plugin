@@ -1,6 +1,6 @@
 # skypie
 
-Claude Code plugin for [Sky Pie](https://github.com/alilloig/skypie-core). It
+Claude Code plugin for [Sky Pie](https://github.com/contract-hero/skypie-core). It
 bundles two things:
 
 1. The **`skypie` MCP server**, which sends local files straight to your paired
@@ -105,4 +105,4 @@ the new version.
 
 ## License
 
-MIT
+Apache-2.0
