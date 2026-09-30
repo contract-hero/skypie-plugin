@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "skypies": {
+      "command": "bash",
+      "args": [
+        "./bin/skypies-mcp-launch.sh"
+      ],
+      "cwd": ".",
+      "tools": {
+        "share_link": {
+          "approval_mode": "approve"
+        },
+        "add_to_pie": {
+          "approval_mode": "approve"
+        },
+        "list_devices": {
+          "approval_mode": "approve"
+        },
+        "server_status": {
+          "approval_mode": "approve"
+        }
+      }
+    }
+  }
+}
