@@ -1,7 +1,7 @@
 {
   "name": "skypies",
-  "version": "0.5.0",
-  "description": "skypies: manage the files your agents produce, and organize all your pies-in-the-sky. Send local files straight to your paired skypies devices over a direct, end-to-end encrypted peer-to-peer link, and offer device pairing the moment a Remote Control session starts.",
+  "version": "0.6.0",
+  "description": "skypies: manage the files your agents produce, and organize all your pies-in-the-sky. Send local files straight to your paired skypies devices over a direct, end-to-end encrypted peer-to-peer link, offer device pairing the moment a Remote Control session starts, and refuse to end a turn whose skypies links were not minted by share_link.",
   "author": {
     "name": "Alvaro Lillo",
     "email": "alilloig@gmail.com"
