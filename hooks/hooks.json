@@ -1,5 +1,5 @@
 {
-  "description": "Offer skypies pairing on the first Remote Control session, and put the comments you left in skypies into the agent's context.",
+  "description": "Offer skypies pairing on the first Remote Control session, put the comments you left in skypies into the agent's context, and refuse to end a turn whose skypies links were not minted by share_link.",
   "hooks": {
     "SessionStart": [
       {
@@ -42,6 +42,17 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT:-.}/bin/skypies-mcp-launch.sh\" hook prompt",
             "timeout": 3
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT:-.}/bin/skypies-mcp-launch.sh\" hook stop",
+            "timeout": 5
           }
         ]
       }

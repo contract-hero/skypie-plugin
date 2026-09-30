@@ -4,7 +4,7 @@ Claude Code and Codex plugin for [skypies](https://contracthero.dev/skypies/),
 the companion that lets your agents make links to the Mac app. Both hosts get
 the MCP server (item 1) and the `artifact-links` skill, which makes the agent
 mint a link for every deliverable it creates for you. Only Claude Code gets the
-hooks (items 2 and 3; see [Codex](#codex)):
+hooks (items 2 to 4; see [Codex](#codex)):
 
 1. The **`skypies` MCP server**, which ships inside the skypies app. It sends
    local files straight to your paired skypies devices over a direct,
@@ -14,6 +14,8 @@ hooks (items 2 and 3; see [Codex](#codex)):
    you having to remember to set it up.
 3. **Feedback hooks**, which put the comments you left on a file in skypies into
    the agent's context.
+4. A **Stop hook**, which refuses to end a turn with a typed skypies link, or
+   with a new deliverable that has no link.
 
 ## Install
 
@@ -94,6 +96,27 @@ These hooks run `skypies-mcp hook <event>` from the app. They are silent when a
 file has no comments, and they never launch the app: a hook fires on every
 `Read` in every session. If the app is not installed or not running, the hooks
 do nothing.
+
+## The Stop hook
+
+A typed `skypies://open?path=…` link opens on the Mac and fails on every other
+device, because it does not name the Mac that holds the file. When the agent
+ends a turn, `skypies-mcp hook stop` reads the session transcript and blocks the
+stop in two cases:
+
+| Case | What the agent must do |
+|---|---|
+| A skypies link in the turn's text is not exactly a `link` or `web_link` that `share_link` returned in this session | Call `share_link` and replace the link |
+| The turn created a `.html`, `.htm`, `.pdf` or `.md` file with `Write`, and the text has no minted link for it | Call `share_link` and put the `web_link` in the reply |
+
+Housekeeping files are not deliverables: `README.md`, `CLAUDE.md`, `AGENTS.md`,
+`SKILL.md`, `CHANGELOG.md` and similar, anything under `.claude/`, `.codex/`,
+`.github/` or `.agents/`, and files deleted before the turn ends.
+
+The hook blocks at most once per stop: when the agent continues because of a
+block, the next stop is not checked again, so the hook cannot loop. It never
+launches the app. It needs skypies 0.1.3 or later; an older app has no `stop`
+event and stays silent.
 
 ## The pairing hook
 
