@@ -1,0 +1,42 @@
+{
+  "name": "skypies",
+  "version": "0.5.0",
+  "description": "Create links to the files your agents produce and open them on your paired skypies devices.",
+  "author": {
+    "name": "Alvaro Lillo",
+    "email": "alilloig@gmail.com"
+  },
+  "homepage": "https://contracthero.dev/skypies/",
+  "repository": "https://github.com/contract-hero/skypies-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "skypies",
+    "file-transfer",
+    "peer-to-peer",
+    "links",
+    "pairing"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.codex-plugin/mcp.json",
+  "hooks": {
+    "hooks": {}
+  },
+  "interface": {
+    "displayName": "skypies",
+    "shortDescription": "Your agents’ files, ready to open on your phone.",
+    "longDescription": "skypies helps Codex share every document it creates with your paired phone, tablet, or Mac. Links are minted by the skypies Mac app and files travel directly between your devices over an end-to-end encrypted peer-to-peer connection.",
+    "developerName": "Contract Hero",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://contracthero.dev/skypies/",
+    "defaultPrompt": [
+      "Send this report to my phone",
+      "Create a document and give me a skypies link",
+      "Share this file with my paired skypies devices"
+    ]
+  }
+}

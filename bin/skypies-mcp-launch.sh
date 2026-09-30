@@ -13,7 +13,7 @@
 #   3. Spotlight, by bundle id       — the app installed somewhere else.
 #
 # Anything on stdout would corrupt the MCP stdio stream, so every message goes
-# to stderr, which Claude Code captures as MCP server logs.
+# to stderr, which the MCP host captures as MCP server logs.
 #
 # `skypies-mcp-launch.sh hook <event>` runs the server's hook subcommand for
 # hooks/hooks.json. A hook fires on every Read in every session, so in hook
@@ -79,9 +79,9 @@ done 3<<< "${spotlight}"
 if [ -n "${stale}" ]; then
   die "found the skypies app, but it has no MCP server at ${SERVER}:
 ${stale}This app is older than the plugin. Update it from ${DOWNLOAD_URL},
-replace the old copy, open it once, then restart Claude Code."
+replace the old copy, open it once, then restart Claude Code or start a new Codex thread."
 fi
 die "the skypies app is not installed.
 This plugin runs the MCP server that ships inside the app.
 Download it from ${DOWNLOAD_URL}, drag skypies to Applications, and open it once.
-Then restart Claude Code."
+Then restart Claude Code or start a new Codex thread."

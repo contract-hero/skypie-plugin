@@ -1,7 +1,10 @@
 # skypies
 
-Claude Code plugin for [skypies](https://contracthero.dev/skypies/), the
-companion that lets your agents make links to the Mac app. It adds three things:
+Claude Code and Codex plugin for [skypies](https://contracthero.dev/skypies/),
+the companion that lets your agents make links to the Mac app. Both hosts get
+the MCP server (item 1) and the `artifact-links` skill, which makes the agent
+mint a link for every deliverable it creates for you. Only Claude Code gets the
+hooks (items 2 and 3; see [Codex](#codex)):
 
 1. The **`skypies` MCP server**, which ships inside the skypies app. It sends
    local files straight to your paired skypies devices over a direct,
@@ -31,6 +34,26 @@ from the same build. Update the app to update the server.
 > first with `claude mcp remove skypies`. Two servers with the same name is one
 > too many.
 
+## Codex
+
+With the skypies Mac app installed, use Codex 0.153 or later:
+
+```sh
+codex plugin marketplace add contract-hero/plugin-marketplace
+codex plugin add skypies@contract-hero
+```
+
+Start a new Codex thread to load the MCP server and `artifact-links` skill.
+The Codex marketplace installs this repository's `main` branch.
+Codex gets the MCP server and link skill only. Its manifest explicitly disables
+hook discovery so the Claude Code hooks are not loaded.
+
+`.codex-plugin/mcp.json` pre-approves four tools: `share_link`, `add_to_pie`,
+`list_devices` and `server_status`. So Codex can send you a link even with
+`approval_policy = "never"`. Every other tool (pairing, `forget_device`,
+`beam_artifact`, `stop_beam`, `list_feedback`, `resolve_feedback`) still asks
+for approval; with `approval_policy = "never"`, Codex refuses them.
+
 ## Tools
 
 | Tool | Use it for |
@@ -47,10 +70,18 @@ compares them before `confirm_pairing` runs.
 
 ## Send boundary
 
-`SKYPIES_MCP_ROOTS` is a colon-separated list of directories the server may send
-files from. A path outside every root is refused. The plugin leaves it unset, so
-it defaults to the directory Claude Code launched the server in. Widen it only
-on purpose, in your own MCP settings.
+`SKYPIES_MCP_ROOTS` is a colon-separated list of directories from which
+`beam_artifact` may send files. A path outside every root is refused.
+`share_link` is **not confined to these roots**: it reaches only your own paired
+devices, so links to your project files still work.
+
+The plugin leaves the variable unset, so roots default to the server's launch
+directory. In Codex, `.codex-plugin/mcp.json` sets `cwd` to `.`, which is the
+installed plugin directory (`~/.codex/plugins/cache/contract-hero/skypies/<version>/`),
+not your project. So by default `beam_artifact` in Codex cannot send your
+project files; use `share_link` for your own devices. In Claude Code, set
+`SKYPIES_MCP_ROOTS` deliberately in your MCP settings if you need broader beam
+access. The launcher does not change directories or widen access.
 
 ## The feedback hooks
 
