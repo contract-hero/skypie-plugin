@@ -1,6 +1,6 @@
 {
   "name": "skypies",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Create links to the files your agents produce and open them on your paired skypies devices.",
   "author": {
     "name": "Alvaro Lillo",
@@ -19,7 +19,19 @@
   "skills": "./skills/",
   "mcpServers": "./.codex-plugin/mcp.json",
   "hooks": {
-    "hooks": {}
+    "hooks": {
+      "Stop": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "bash \"${PLUGIN_ROOT}/bin/skypies-mcp-launch.sh\" hook stop",
+              "timeout": 5
+            }
+          ]
+        }
+      ]
+    }
   },
   "interface": {
     "displayName": "skypies",

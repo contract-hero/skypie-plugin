@@ -3,8 +3,8 @@
 Claude Code and Codex plugin for [skypies](https://contracthero.dev/skypies/),
 the companion that lets your agents make links to the Mac app. Both hosts get
 the MCP server (item 1) and the `artifact-links` skill, which makes the agent
-mint a link for every deliverable it creates for you. Only Claude Code gets the
-hooks (items 2 to 4; see [Codex](#codex)):
+mint a link for every deliverable it creates for you. Both hosts also get the
+Stop hook (item 4); only Claude Code gets items 2 and 3 (see [Codex](#codex)):
 
 1. The **`skypies` MCP server**, which ships inside the skypies app. It sends
    local files straight to your paired skypies devices over a direct,
@@ -47,8 +47,23 @@ codex plugin add skypies@contract-hero
 
 Start a new Codex thread to load the MCP server and `artifact-links` skill.
 The Codex marketplace installs this repository's `main` branch.
-Codex gets the MCP server and link skill only. Its manifest explicitly disables
-hook discovery so the Claude Code hooks are not loaded.
+Codex gets the MCP server, the link skill and the [Stop hook](#the-stop-hook).
+Its manifest declares only the Stop hook, so Codex does not load
+`hooks/hooks.json` and its Claude Code hooks.
+
+Codex runs a plugin hook only after you trust it; until then it lists the hook
+as untrusted and skips it, silently in `codex exec`. To trust it, run `/hooks`
+in a Codex thread and trust the skypies Stop hook. Codex then writes this entry
+to `~/.codex/config.toml`, with the hash it reports for the hook (app-server
+`hooks/list`, field `currentHash`):
+
+```toml
+[hooks.state."skypies@contract-hero:plugin.json#hooks[0]:stop:0:0"]
+trusted_hash = "sha256:…"
+```
+
+A plugin update that changes the hook command changes the hash, so the hook
+must be trusted again.
 
 `.codex-plugin/mcp.json` pre-approves four tools: `share_link`, `add_to_pie`,
 `list_devices` and `server_status`. So Codex can send you a link even with
@@ -101,13 +116,13 @@ do nothing.
 
 A typed `skypies://open?path=…` link opens on the Mac and fails on every other
 device, because it does not name the Mac that holds the file. When the agent
-ends a turn, `skypies-mcp hook stop` reads the session transcript and blocks the
-stop in two cases:
+ends a turn, `skypies-mcp hook stop` reads the session transcript (a Claude Code
+transcript or a Codex rollout) and blocks the stop in two cases:
 
 | Case | What the agent must do |
 |---|---|
 | A skypies link in the turn's text is not exactly a `link` or `web_link` that `share_link` returned in this session | Call `share_link` and replace the link |
-| The turn created a `.html`, `.htm`, `.pdf` or `.md` file with `Write`, and the text has no minted link for it | Call `share_link` and put the `web_link` in the reply |
+| The turn created a `.html`, `.htm`, `.pdf` or `.md` file (`Write` in Claude Code, an added file in a Codex patch), and the text has no minted link for it | Call `share_link` and put the `web_link` in the reply |
 
 Housekeeping files are not deliverables: `README.md`, `CLAUDE.md`, `AGENTS.md`,
 `SKILL.md`, `CHANGELOG.md` and similar, anything under `.claude/`, `.codex/`,
