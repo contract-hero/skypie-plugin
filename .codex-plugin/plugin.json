@@ -13,7 +13,7 @@
     "skypies",
     "file-transfer",
     "peer-to-peer",
-    "remote-control",
+    "links",
     "pairing"
   ],
   "skills": "./skills/",

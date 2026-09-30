@@ -79,9 +79,9 @@ done 3<<< "${spotlight}"
 if [ -n "${stale}" ]; then
   die "found the skypies app, but it has no MCP server at ${SERVER}:
 ${stale}This app is older than the plugin. Update it from ${DOWNLOAD_URL},
-replace the old copy, open it once, then restart your MCP host."
+replace the old copy, open it once, then restart Claude Code or start a new Codex thread."
 fi
 die "the skypies app is not installed.
 This plugin runs the MCP server that ships inside the app.
 Download it from ${DOWNLOAD_URL}, drag skypies to Applications, and open it once.
-Then restart your MCP host."
+Then restart Claude Code or start a new Codex thread."

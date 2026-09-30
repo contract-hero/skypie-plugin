@@ -3,9 +3,9 @@ name: artifact-links
 description: >-
   Mint a skypies link to a local file that opens on ANY of the user's paired
   devices, not just this Mac. Use proactively whenever you create a document
-  or any file for the user — a report, an audit, an explainer, any
-  deliverable — or when they ask to share, send or open a file on their phone,
-  tablet or other Mac.
+  or other deliverable for the user (not ordinary source-code edits) — a
+  report, an audit, an explainer — or when they ask to share, send or open a
+  file on their phone, tablet or other Mac.
   Also use when a link failed on a device with "canonicalize failed", "No such
   file or directory", or a path that plainly exists on the Mac, or when a link
   looked clickable in the agent app but did nothing.
@@ -15,13 +15,13 @@ description: >-
 
 ## Every user deliverable gets a link
 
-For EVERY document or file you create for the user — reports, HTML, markdown,
-spreadsheets, presentations, PDFs, images, or any other deliverable — proactively
-call the skypies MCP `share_link` tool with its absolute path after saving it.
-Put the returned `https` URL in your reply as a clickable markdown link for
-each file. Do not wait for the user to ask to share it. If the tool is
-unavailable or fails, explain the blocker;
-never invent a URL or claim a link was minted.
+For EVERY deliverable you create for the user to read — reports, HTML,
+markdown docs, spreadsheets, presentations, PDFs, images — but not source files
+you edit as part of a code change, proactively call the skypies MCP
+`share_link` tool with its absolute path after saving it. Put the returned
+`https` URL in your reply as a clickable markdown link for each file. Do not
+wait for the user to ask to share it. If the tool is unavailable or fails,
+explain the blocker; never invent a URL or claim a link was minted.
 
 ## The mistake this prevents
 
@@ -55,10 +55,9 @@ skypies://open?path=%2FUsers%2Fyou%2Fworkspace%2Freport.html&from=e35eb3e489…
 ```
 
 **Put the `https` form in chat**, as a markdown link: `[report.html](https://…)`.
-Agent chat clients can reject custom schemes (Claude Desktop accepts only
-`http(s)`), and iOS does not
-linkify a custom scheme in plain text, so the raw `skypies://` form is inert in
-those clients even when it looks like a link. The `https` page hands the
+Some chat clients open only `http(s)` links (Claude Desktop is one), and iOS
+does not linkify a custom scheme in plain text. In those places the raw
+`skypies://` form does nothing, even when it looks like a link. The `https` page hands the
 fragment straight back to skypies; the path travels in the fragment, so
 the web host never receives it.
 
