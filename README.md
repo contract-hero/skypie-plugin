@@ -1,9 +1,9 @@
 # skypies
 
-Codex and Claude Code plugin for [skypies](https://contracthero.dev/skypies/), the
-companion that lets your agents make links to the Mac app. Both hosts get the
-MCP server and the artifact-links skill, which proactively mints an HTTPS link
-for every file created for you. Claude Code also gets the hooks below:
+Claude Code and Codex plugin for [skypies](https://contracthero.dev/skypies/),
+the companion that lets your agents make links to the Mac app. Its
+`artifact-links` skill makes the agent mint a link for every file it creates
+for you. It adds three things; Codex gets only the first (see [Codex](#codex)):
 
 1. The **`skypies` MCP server**, which ships inside the skypies app. It sends
    local files straight to your paired skypies devices over a direct,

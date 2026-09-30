@@ -2,9 +2,10 @@
 name: artifact-links
 description: >-
   Mint a skypies link to a local file that opens on ANY of the user's paired
-  devices, not just this Mac. Use proactively whenever you create a document or any file for the user
-  in Codex or Claude — a report, an audit, an explainer, any deliverable — or when
-  they ask to share, send or open a file on their phone, tablet or other Mac.
+  devices, not just this Mac. Use proactively whenever you create a document
+  or any file for the user — a report, an audit, an explainer, any
+  deliverable — or when they ask to share, send or open a file on their phone,
+  tablet or other Mac.
   Also use when a link failed on a device with "canonicalize failed", "No such
   file or directory", or a path that plainly exists on the Mac, or when a link
   looked clickable in the agent app but did nothing.
@@ -18,8 +19,8 @@ For EVERY document or file you create for the user — reports, HTML, markdown,
 spreadsheets, presentations, PDFs, images, or any other deliverable — proactively
 call the skypies MCP `share_link` tool with its absolute path after saving it.
 Put the returned `https` URL in your reply as a clickable markdown link for
-each file. Do not wait for the user to ask to share it. This applies in both
-Codex and Claude. If the tool is unavailable or fails, explain the blocker;
+each file. Do not wait for the user to ask to share it. If the tool is
+unavailable or fails, explain the blocker;
 never invent a URL or claim a link was minted.
 
 ## The mistake this prevents
